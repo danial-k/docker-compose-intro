@@ -9,7 +9,7 @@ docker-compose up
 ```
 If your machine does not already have docker-compose installed, follow the [official installation instructions](https://docs.docker.com/compose/install/).  This command should bring up the three backend services up first then the nginx reverse proxy.  The dependency is set by the ```depends_on``` directive in the [docker-compose.yaml](docker-compose.yaml) file.
 
-Repeatedly visiting http://127.0.0.1:3030/whoami should alternate between the hostnames in a round-robin manner.
+Repeatedly visiting http://127.0.0.1:3030/ should alternate between the hostnames in a round-robin manner.
 
 ## What did Compose do for us?
 In the background, Docker Compose:
@@ -54,4 +54,4 @@ docker run \
 nginx:1.17.0
 ```
 
-Repeatedly visiting http://127.0.0.1:3031/whoami should alternate between the hostnames in a round-robin manner.
+Repeatedly visiting http://127.0.0.1:3031/ should alternate between the hostnames in a round-robin manner.
