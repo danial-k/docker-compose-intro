@@ -41,7 +41,7 @@ jwilder/whoami:latest
 ```shell
 docker run \
 --network nginx-load-balancer \
---name whoami2 \
+--name whoami3 \
 jwilder/whoami:latest
 ```
 
