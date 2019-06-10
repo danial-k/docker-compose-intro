@@ -26,8 +26,8 @@ services:
     environment:
       - KIE_SERVER_LOCATION=http://kie-server:8080/kie-server/services/rest/server
       - KIE_SERVER_CONTROLLER=http://drools-workbench:8080/business-central/rest/controller
-      - KIE_SERVER_USER=${KIE_SERVER_USER}
-      - KIE_SERVER_PWD=${KIE_SERVER_PWD}
+      - KIE_SERVER_USER=admin
+      - KIE_SERVER_PWD=admin
       - KIE_MAVEN_REPO=http://drools-workbench:8080/business-central/maven2
     depends_on:
       - "drools-workbench"
