@@ -1,0 +1,26 @@
+# Set version of docker compose syntax, use most recent where possible
+version: '3'
+
+# Define services which will become separate containers,
+# sharing a single network with DNS resolvable hostnames
+services:
+  # Reverse proxy
+  nginx:
+    image: "nginx:latest"
+    ports:
+      - "3030:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - "whoami1"
+      - "whoami2"
+      - "whoami3"
+  # Node 1
+  whoami1:
+    image: "jwilder/whoami:latest"
+  # Node 2
+  whoami2:
+    image: "jwilder/whoami:latest"
+  # Node 3
+  whoami3:
+    image: "jwilder/whoami:latest"
