@@ -24,22 +24,28 @@ This is equivalent to:
 docker network create nginx-load-balancer
 ```
 Followed by creating the containers within the new network:
-```
+```shell
 docker run \
 --network nginx-load-balancer \
 --name whoami1 \
 jwilder/whoami:latest
+```
 
+```shell
 docker run \
 --network nginx-load-balancer \
 --name whoami2 \
 jwilder/whoami:latest
+```
 
+```shell
 docker run \
 --network nginx-load-balancer \
 --name whoami2 \
 jwilder/whoami:latest
+```
 
+```shell
 docker run \
 --network nginx-load-balancer \
 --name nginx \
@@ -47,3 +53,5 @@ docker run \
 -p 3031:80 
 nginx:1.17.0
 ```
+
+Repeatedly visiting http://127.0.0.1:3031/whoami should alternate between the hostnames in a round-robin manner.
