@@ -54,4 +54,4 @@ docker run \
 nginx:1.17.0
 ```
 
-Repeatedly visiting http://127.0.0.1:3031/ should alternate between the hostnames in a round-robin manner.
+Repeatedly visiting http://127.0.0.1:3031/ should alternate between the hostnames in a round-robin manner, as before.
