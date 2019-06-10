@@ -1,4 +1,4 @@
-# Java Drools Maven Docker example
+# Drools Workbench KIE Execution Server Docker Compose example
 [Drools](https://docs.jboss.org/drools/release/7.18.0.Final/drools-docs/html_single/) is an open source business rules management system (BRMS) designed to offload complex decision making from applications into a centrally managed rules repository. The suite includes Business Central, a web-based UI for authoring and managing rules and KIE execution servers for providing REST endpoints to evaluate rules.
 In this example, three containers will be used:
 - a Maven container used to generate a Drools project
