@@ -49,7 +49,7 @@ jwilder/whoami:latest
 docker run \
 --network nginx-load-balancer \
 --name nginx \
---mount type=bind,src=nginx/default.conf:/etc/nginx/conf.d/default.conf \
+--mount type=bind,src=`pwd`/nginx/default.conf:/etc/nginx/conf.d/default.conf \
 -p 3031:80 \
 nginx:1.17.0
 ```
