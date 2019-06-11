@@ -22,19 +22,32 @@ If using Postman, create a new collection and set basic auth options to admin an
 
 Execute runtime commands
 - Type: ```POST```
-- URL: http://127.0.0.1:3920/kie-server/services/rest/server/containers/instances/app_1.0-SNAPSHOT
+- Authorization: basic (admin:admin)
+- URL: http://127.0.0.1:3036/kie-server/services/rest/server/containers/instances/app_1.0-SNAPSHOT
 - Body type: ```raw```
 - Content type: ```application/json```
 - Headers: ```Accept```:```application/json```
 - Body:
 ```
 {
-  "commands" : [ {
-    "fire-all-rules": {
-        "max": -1,
-        "out-identifier": "firedActivations"
-    }
-  } ]
+    "commands": [
+        {
+            "insert": {
+                "object": {
+                    "com.example.sample.Message": {
+                        "type": "Hello"
+                    }
+                },
+                "out-identifier": "Message"
+            }
+        },
+        {
+            "fire-all-rules": {
+                "max": -1,
+                "out-identifier": "firedActivations"
+            }
+        }
+    ]
 }
 ```
 
@@ -50,14 +63,13 @@ This is equivalent to creating a network:
 docker network create drools-workbench-kie-server
 ```
 
-Follwed by starting a Business Central UI Docker container:
+Followed by starting a Business Central UI Docker container:
 ```shell
 docker run \
--d \
 -p 3040:8080 \
 --name drools-workbench \
 --hostname drools-workbench \
---network drools \
+--network drools-workbench-kie-server \
 jboss/drools-workbench-showcase:7.18.0.Final
 ```
 
@@ -77,8 +89,4 @@ jboss/kie-server-showcase:7.18.0.Final
 ```
 ```KIE_SERVER_CONTROLLER``` is the path to the Business Central remote controller. ```KIE_SERVER_LOCATION``` is a self-identifying callback URL given to Business Central when it needs to make API calls back to this KIE container.```KIE_MAVEN_REPO``` is the remote Maven repository on Business Central used to retrieve built artifacts.
 
-Revisiting http://127.0.0.1:3040/business-central/rest/controller/management/servers should show the new execution server.  In the Business Central workbench, visiting ```Menu``` > ```Deploy``` > ```Execution Servers``` should also show the new remote server.
-
-The KIE execution server documentation will be available at http://127.0.0.1:3041/kie-server/docs.
-
-
+The endpoints will be available per the previous Docker Compose section with different ports.
