@@ -6,7 +6,7 @@ In this example, two containers will be used:
 
 ## Starting with Docker Compose
 Clone this repository with ```git clone https://github.com/danial-k/docker-compose-intro.git``` and open the ```
-drools-workbench-kie-server``` directory in an IDE. Examine the contents of [docker-compose.yaml](docker-compose.yaml).  Note that credentials are hard coded for demonstration purposes only and should be changed to environment variables or another means of moving credentials out of source control. Also examine the contents of [wait-for-workbench.sh](wait-for-workbench.sh).  This script polls the Business Central API to check for availability as the Docker engine cannot know when Business Central is actually ready to receive connections.  To start the containers with Docker Compose, run:
+drools-workbench-kie-server``` directory in an IDE. Examine the contents of [docker-compose.yaml](docker-compose.yaml).  Note that credentials are hard coded for demonstration purposes only and should be changed to environment variables or another means of moving credentials out of source control. Also examine the contents of [wait-for-workbench.sh](wait-for-workbench.sh).  This script polls the Business Central API to check for availability as the Docker engine [cannot know](https://docs.docker.com/compose/startup-order/) when Business Central is actually ready to receive connections.  To start the containers with Docker Compose, run:
 ```shell
 docker-compose up
 ```
