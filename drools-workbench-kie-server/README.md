@@ -12,26 +12,15 @@ docker-compose up
 ```
 If your machine does not already have docker-compose installed, follow the [official installation instructions](https://docs.docker.com/compose/install/). This command should bring up a KIE execution server first then the Business Central UI. The dependency is set by the ```depends_on directive``` in the docker-compose.yaml file but it is important to note that Docker cannot know when Business Central is actually ready to receive connections, even though from Docker's perspective the container is 'up'.  For this reason, a custom script ([wait-for-workbench.sh](wait-for-workbench.sh)) is required to keep polling the container for our definition of 'up'.
 
-Following startup, the Business Central workbench should be available at http://127.0.0.1:3035/business-central, with ```admin``` and ```admin``` as the credentials.  The Controller API documentation is available at http://127.0.0.1:3035/business-central/docs.  Note that additional API endpoints for other operations are documented [here](https://docs.jboss.org/drools/release/7.18.0.Final/drools-docs/html_single/#knowledge-store-rest-api-endpoints-ref_decision-tables).  In the Business Central workbench, visiting ```Menu``` > ```Deploy``` > ```Execution Servers``` should also show the remote KIE execution server.  The KIE execution server documentation will be available at http://127.0.0.1:3031/kie-server/docs.
+Following startup, the Business Central workbench should be available at http://127.0.0.1:3035/business-central, with ```admin``` and ```admin``` as the credentials.  The Controller API documentation is available at http://127.0.0.1:3035/business-central/docs.  Note that additional API endpoints for other operations are documented [here](https://docs.jboss.org/drools/release/7.18.0.Final/drools-docs/html_single/#knowledge-store-rest-api-endpoints-ref_decision-tables).  In the Business Central workbench, visiting ```Menu``` > ```Deploy``` > ```Execution Servers``` should also show the remote KIE execution server.  The KIE execution server documentation should be available at http://127.0.0.1:3036/kie-server/docs.
 
 ## Importing project into Business Central
-Navigate to the projects page and select Import Project. In the Repostitory URL, enter file:///app then select import. This will instruct the importer to read from the local container file system and import the project into its own local git repository. Select the project and choose ```OK``` to being the import process. To view the project in the local Maven repository, navigate to ```Settings``` > ```Artifacts```.
+Navigate to the projects page and select Import Project. In the Repostitory URL, enter https://github.com/danial-k/drools-sample.git then select import. Note that it is also possible to import from the local file system with ```file:///<path>```, for example, if a project was mounted as a Docker volume. This will instruct the importer to read from the local container file system and import the project into its own local git repository. Select the project and choose ```OK``` to being the import process. Click ```Deploy``` in the top right to push the rule package to all availabile execution servers.  To view the project in the local Maven repository, navigate to ```Settings``` > ```Artifacts```.  At this point, the API should be able to process requests 
 
 ## Making API requests
-If using Postman, create a new collection and set basic auth options to admin and admin. In what follows, a number of requests will be made within this collection that will inherit authentication configuration information.
+If using Postman, create a new collection and set basic auth options to admin and admins so requests will inherit authentication configuration information.
 
-### Get server information
-- Type: ```GET```
-- URL: http://127.0.0.1:3920/kie-server/services/rest/server
-- Headers: ```Accept```:```application/json```
-
-### Get list of running KIE containers
-A KIE container is an isolated rule execution environment (loaded kjar) to allow multiple API services (projects) to be served. There is no relation between KIE containers and the underlying Docker container.
-- Type: ```GET```
-- URL: http://127.0.0.1:3920/kie-server/services/rest/server/containers
-- Headers: ```Accept```:```application/json```
-
-### Execute runtime commands
+Execute runtime commands
 - Type: ```POST```
 - URL: http://127.0.0.1:3920/kie-server/services/rest/server/containers/instances/app_1.0-SNAPSHOT
 - Body type: ```raw```
