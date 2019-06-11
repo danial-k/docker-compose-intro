@@ -79,7 +79,7 @@ docker run \
 -p 3041:8080 \
 --name kie-server \
 --hostname kie-server \
---network drools \
+--network drools-workbench-kie-server \
 --env KIE_SERVER_CONTROLLER=http://drools-workbench:8080/business-central/rest/controller \
 --env KIE_SERVER_LOCATION=http://kie-server:8080/kie-server/services/rest/server \
 --env KIE_SERVER_USER=admin \
