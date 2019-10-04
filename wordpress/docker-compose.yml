@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  # Wordpress blog
+  wordpress:
+    image: "wordpress"
+    ports:
+      - "9150:80"
+  # MySQL database
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+  # Database management UI
+  phpmyadmin:
+    image: "phpmyadmin/phpmyadmin"
+    ports:
+      - "9151:80"
+    environment:
+      - "PMA_HOST=mysql"
